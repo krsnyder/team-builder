@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import { useState } from 'react'
+import Form from './components/Form'
 import './App.css';
 
+const initialBand = {
+  name: "",
+  email: "",
+  role: ""
+};
+
 function App() {
+  const [band, setBand] = useState(initialBand)
+
+  const updateForm = () => {
+    console.log("update")
+  }
+  
+  const submitForm = () => {
+    console.log("submit")
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Band Builder</h1>
+      <Form
+        band={band}
+        update={updateForm}
+        submit={submitForm}
+      />
     </div>
   );
 }
