@@ -1,8 +1,14 @@
 export default function Form(props) {
-  const {band, update, onSubmit} = props
+  const {band, update, submit} = props
 
   const onChange = (e) => {
-    update(e.target.values)
+    const {name, value} = e.target;
+    update(name, value)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    submit()
   }
 
   return (
@@ -24,7 +30,7 @@ export default function Form(props) {
             type="text"
             name="email"
             onChange={onChange}
-            value={band.name}
+            value={band.email}
           />
         </label>
 
@@ -32,12 +38,12 @@ export default function Form(props) {
           Role:
           <select name="role" onChange={onChange} value={band.role}>
             <option value=""> ---- Select Role --- </option>
-            <option value=""> Bass </option>
-            <option value=""> Drummer </option>
-            <option value=""> Keys </option>
-            <option value=""> Lead Guitar </option>
-            <option value=""> Guitar </option>
-            <option value=""> Vocals </option>
+            <option value="bass"> Bass </option>
+            <option value="drummer"> Drummer </option>
+            <option value="keys"> Keys </option>
+            <option value="lead"> Lead Guitar </option>
+            <option value="guitar"> Guitar </option>
+            <option value="vocals"> Vocals </option>
           </select>
         </label>
 

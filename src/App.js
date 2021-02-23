@@ -1,32 +1,52 @@
 import { useState } from 'react'
 import Form from './components/Form'
-import './App.css';
+import Member from './components/Member'
 
-const initialBand = {
-  name: "",
-  email: "",
-  role: ""
+const initialFormValues = {
+  name: "Bob",
+  email: "Bob@Bob.com",
+  role: "Bass"
 };
 
 function App() {
-  const [band, setBand] = useState(initialBand)
+  const [band, setBand] = useState([])
 
-  const updateForm = () => {
-    console.log("update")
+  const [formValues, setFormValues] = useState(initialFormValues)
+
+  const updateForm = (inputName, inputValue) => {
+    setFormValues({
+      ...formValues,
+      [inputName]: inputValue,
+    });
   }
   
   const submitForm = () => {
-    console.log("submit")
+    const newMember = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      role: formValues.role,
+    };
+
+    if (!newMember.name || !newMember.email || !newMember.role) return;
+
+    setBand([newMember, ...band])
+    console.log(band)
+    setFormValues(initialFormValues)
   }
 
   return (
     <div className="App">
-      <h1>Band Builder</h1>
+      <h1>Band Application</h1>
+
       <Form
         band={band}
         update={updateForm}
         submit={submitForm}
       />
+
+      {band.map((member) => {
+        return <Member key={member.id} details={member} />
+      })}
     </div>
   );
 }
